@@ -86,7 +86,6 @@ const CarRentalPage = () => {
       return;
     }
 
-    console.log("Rentas fetched:", rentas);
     const carrosFiltrados = carrosDisponibles.filter((carro) => {
       const enUbicacion = carro.ciudad === ubicacion;
 
