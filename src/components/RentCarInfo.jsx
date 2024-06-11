@@ -5,7 +5,7 @@ import '@designs-css/RentCarInfo.css';
 
 const RentalConfirmationPage = () => {
   const location = useLocation();
-  const { marca, modelo, precio, ciudad, nombre, apellido, cedula, direccion, telefono, fechaInicio, duracion, imagen } = location.state; // Asegúrate de tener la URL de la imagen del carro en la ubicación
+  const { marca, modelo, precio, ciudad, color, nombre, apellido, cedula, direccion, telefono, fechaInicio, duracion, imagen } = location.state; // Asegúrate de tener la URL de la imagen del carro en la ubicación
   const navigate = useNavigate();
 
   const handleConfirm = async () => {
@@ -15,6 +15,7 @@ const RentalConfirmationPage = () => {
       modelo,
       precio,
       ciudad,
+      color,
       nombre,
       apellido,
       cedula,
@@ -27,7 +28,7 @@ const RentalConfirmationPage = () => {
     console.log('Voy a entrar al try con:', formData);
     try {
       console.log('Voy a conectarme:');
-      const response = await fetch('http://localhost:8080/api/v1/prestamos', {
+      const response = await fetch('http://localhost:8080/api/v1/rentas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -64,7 +65,8 @@ const RentalConfirmationPage = () => {
           <p>Marca: {marca}</p>
           <p>Modelo: {modelo}</p>
           <p>Ciudad: {ciudad}</p>
-          <p>Precio: {precio}</p>
+          <p>Color: {color}</p>
+          <p>Precio: ${precio}</p>
         </div>
         <div className="customer-info">
           <h2>Datos del cliente</h2>

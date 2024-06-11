@@ -4,7 +4,7 @@ import '@designs-css/RentCarForm.css';
 
 const RentalFormPage = () => {
   const location = useLocation();
-  const { carro, precio, ciudad } = location.state;
+  const { carro, precio, ciudad, color} = location.state;
   const { marca, modelo } = useParams();
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -23,6 +23,7 @@ const RentalFormPage = () => {
       modelo,
       precio,
       ciudad,
+      color,
       nombre,
       apellido,
       cedula: parseInt(cedula),
@@ -33,7 +34,7 @@ const RentalFormPage = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/v1/users', {
+      const response = await fetch('http://localhost:8080/api/v1/usuarios', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

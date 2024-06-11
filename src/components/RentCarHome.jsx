@@ -24,7 +24,7 @@ const CarRentalPage = () => {
   useEffect(() => {
     const fetchCarros = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/v1/cars");
+        const response = await fetch("http://localhost:8080/api/v1/carros");
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
         }
@@ -42,17 +42,17 @@ const CarRentalPage = () => {
   useEffect(() => {
     const fetchRentas = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/v1/prestamos");
+        const response = await fetch("http://localhost:8080/api/v1/rentas");
         if (!response.ok) {
           throw new Error("Network response was not ok " + response.statusText);
         }
         const data = await response.json();
         console.log(data);
-        setRentas(Array.isArray(data.prestamos) ? data.prestamos : []);
+        setRentas(Array.isArray(data.rentas) ? data.rentas : []);
       } catch (error) {
         console.error("Error fetching rentas:", error);
         setRentas([]);
-      }      
+      }
     };
 
     fetchRentas();
@@ -90,8 +90,9 @@ const CarRentalPage = () => {
     const carrosFiltrados = carrosDisponibles.filter((carro) => {
       const enUbicacion = carro.ciudad === ubicacion;
 
-      const carroRentas = rentas.filter((renta) => renta.idCarro === carro.idCarro);
-      
+      const carroRentas = rentas.filter(
+        (renta) => renta.idCarro === carro.idCarro
+      );
 
       const estaDisponible = carroRentas.every((renta) => {
         const rentaInicio = new Date(renta.fechaInicio);
@@ -109,7 +110,12 @@ const CarRentalPage = () => {
 
   const handleRentarClick = (carro) => {
     navigate(`/rent-form/${carro.marca}/${carro.modelo}`, {
-      state: { carro, precio: carro.precio, ciudad: carro.ciudad },
+      state: {
+        carro,
+        precio: carro.precio,
+        ciudad: carro.ciudad,
+        color: carro.color,
+      },
     });
   };
 
@@ -187,7 +193,13 @@ const CarRentalPage = () => {
                     />
                     <div>
                       <p>
-                        {carro.marca} {carro.modelo} - Precio: ${carro.precio}
+                        {carro.marca} {carro.modelo}
+                        <br />
+                        Ciudad: {carro.ciudad}
+                        <br />
+                        Color: {carro.color}
+                        <br />
+                        Precio: ${carro.precio}
                       </p>
                       <button
                         onClick={() => handleRentarClick(carro)}
@@ -216,7 +228,13 @@ const CarRentalPage = () => {
                 />
                 <div>
                   <p>
-                    {carro.marca} {carro.modelo} - Precio: ${carro.precio}
+                    {carro.marca} {carro.modelo}
+                    <br />
+                    Ciudad: {carro.ciudad}
+                    <br />
+                    Color: {carro.color}
+                    <br />
+                    Precio: ${carro.precio}
                   </p>
                   <button
                     onClick={() => handleRentarClick(carro)}
