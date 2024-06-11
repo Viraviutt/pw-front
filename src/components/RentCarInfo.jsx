@@ -5,17 +5,17 @@ import '@designs-css/RentCarInfo.css';
 
 const RentalConfirmationPage = () => {
   const location = useLocation();
-  const { marca, modelo, precio, ciudad, color, nombre, apellido, cedula, direccion, telefono, fechaInicio, duracion, imagen } = location.state; // Asegúrate de tener la URL de la imagen del carro en la ubicación
+  const { carro, nombre, apellido, cedula, direccion, telefono, fechaInicio, duracion} = location.state; // Asegúrate de tener la URL de la imagen del carro en la ubicación
   const navigate = useNavigate();
 
   const handleConfirm = async () => {
     console.log("pulsaste el boton.");
     const formData = {
-      marca,
-      modelo,
-      precio,
-      ciudad,
-      color,
+      marca: carro.marca,
+      modelo: carro.modelo,
+      precio: carro.precio,
+      ciudad: carro.ciudad,
+      color: carro.color,
       nombre,
       apellido,
       cedula,
@@ -60,13 +60,13 @@ const RentalConfirmationPage = () => {
         <div className="car-info">
           <h2>Información del carro</h2>
           <div className="car-image-container">
-            <img src={imagen} alt={`Imagen de ${marca} ${modelo}`} />
+            <img src={carro.imagen} alt={`Imagen de ${carro.marca} ${carro.modelo}`} />
           </div>
-          <p>Marca: {marca}</p>
-          <p>Modelo: {modelo}</p>
-          <p>Ciudad: {ciudad}</p>
-          <p>Color: {color}</p>
-          <p>Precio: ${precio}</p>
+          <p>Marca: {carro.marca}</p>
+          <p>Modelo: {carro.modelo}</p>
+          <p>Ciudad: {carro.ciudad}</p>
+          <p>Color: {carro.color}</p>
+          <p>Precio: ${carro.precio}</p>
         </div>
         <div className="customer-info">
           <h2>Datos del cliente</h2>
